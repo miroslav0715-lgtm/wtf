@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Космический дайджест | Тематический сайт</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        /* Светлая тема (по умолчанию) */
+        :root {
+            --bg: #f5f7fe;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #334155;
+            --accent: #3b82f6;
+            --accent-dark: #2563eb;
+            --border: #e2e8f0;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Тёмная тема */
+        body.dark {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --border: #334155;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.5;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent), #a855f7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: var(--surface);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fact-box {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 1rem;
+            font-style: italic;
+            border-left: 4px solid var(--accent);
+        }
+
+        .fact-box p {
+            font-size: 1.1rem;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: var(--accent-dark);
+            transform: scale(0.98);
+        }
+
+        /* Карточки (grid) */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card h3 {
+            margin: 1rem 1rem 0.5rem;
+        }
+
+        .card p {
+            margin: 0 1rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Слайдер */
+        .slider-section {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .slider-image {
+            width: 100%;
+            border-radius: 1rem;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        .slider-buttons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* footer */
+        footer {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .visit-counter {
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">
+            <h1>🚀 Космический дайджест</h1>
+            <p>Тематический портал о вселенной, галактиках и открытиях</p>
+        </div>
+        <button class="theme-toggle" id="themeBtn">🌙 Тёмная тема</button>
+    </header>
+
+    <section class="hero">
+        <h2>✨ Добро пожаловать во Вселенную ✨</h2>
+        <div class="fact-box">
+            <p id="dailyFact">Загрузка факта...</p>
+        </div>
+        <button id="newFactBtn">🔄 Случайный факт</button>
+        <div class="visit-counter" id="visitDisplay"></div>
+    </section>
+
+    <div class="cards">
+        <div class="card">
+            <img src="https://picsum.photos/id/4/400/200" alt="Луна и Земля">
+            <h3>Луна — спутник Земли</h3>
+            <p>Единственное небесное тело, на котором побывал человек. Расстояние ~384 400 км.</p>
+        </div>
+        <div class="card">
+            <img src="https://picsum.photos/id/104/400/200" alt="Туманность">
+            <h3>Туманность Ориона</h3>
+            <p>Ближайшая к нам область звездообразования, видимая невооружённым глазом.</p>
+        </div>
+        <div class="card">
+            <img src="https://picsum.photos/id/119/400/200" alt="Чёрная дыра">
+            <h3>Чёрные дыры</h3>
+            <p>Области пространства с колоссальной гравитацией, даже свет не может их покинуть.</p>
+        </div>
+    </div>
+
+    <div class="slider-section">
+        <h3 style="margin-bottom: 1rem;">📸 Фотогалерея (слайдер)</h3>
+        <div class="slider-container">
+            <img id="sliderImg" class="slider-image" src="https://picsum.photos/id/29/600/337" alt="Космическое фото">
+            <div class="slider-buttons">
+                <button id="prevSlide">◀ Назад</button>
+                <button id="nextSlide">Вперёд ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Космический дайджест · Интерактивная страница с JavaScript</p>
+        <p>Принципы: тематичность, адаптивность, динамический контент, доступность.</p>
+    </footer>
+</div>
+
+<script>
+    // 1. Переключение светлой / тёмной темы с сохранением в localStorage
+    const themeBtn = document.getElementById('themeBtn');
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark');
+        themeBtn.textContent = '☀️ Светлая тема';
+    } else {
+        themeBtn.textContent = '🌙 Тёмная тема';
+    }
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeBtn.textContent = isDark ? '☀️ Светлая тема' : '🌙 Тёмная тема';
+    });
+
+    // 2. База фактов о космосе (тематический контент)
+    const spaceFacts = [
+        "Один день на Венере длиннее года на Венере.",
+        "В космосе нет атмосферы, поэтому звуки не распространяются.",
+        "Солнце составляет 99,86% массы всей Солнечной системы.",
+        "Космонавты вырастают на 3-5 см во время длительных миссий из-за отсутствия гравитации.",
+        "Самый большой вулкан в Солнечной системе — Олимп на Марсе, высотой 21 км.",
+        "Год на Меркурии длится всего 88 земных дней.",
+        "Кольца Сатурна состоят из льда и камней, некоторые размером с дом.",
+        "Астронавты видели на Луне следы собственных ботинок, которые сохранятся миллионы лет."
+    ];
+
+    const factParagraph = document.getElementById('dailyFact');
+    function showRandomFact() {
+        const randomIndex = Math.floor(Math.random() * spaceFacts.length);
+        factParagraph.textContent = spaceFacts[randomIndex];
+    }
+    showRandomFact(); // при загрузке
+    document.getElementById('newFactBtn').addEventListener('click', showRandomFact);
+
+    // 3. Счётчик посещений (сессионный – для демонстрации)
+    let visits = sessionStorage.getItem('pageVisits');
+    if (visits === null) {
+        visits = 1;
+    } else {
+        visits = Number(visits) + 1;
+    }
+    sessionStorage.setItem('pageVisits', visits);
+    const visitSpan = document.getElementById('visitDisplay');
+    visitSpan.innerHTML = `👁️ Просмотров за сессию: ${visits}`;
+
+    // 4. Простой слайдер изображений (тематические фото от LoremFlick, можно заменить на реальные NASA)
+    const images = [
+        "https://picsum.photos/id/29/600/337",   // телескоп
+        "https://picsum.photos/id/96/600/337",   // горы и звёзды
+        "https://picsum.photos/id/124/600/337",  // туманность
+        "https://picsum.photos/id/13/600/337"    // песчаный ландшафт (символизирует марс)
+    ];
+    let currentSlide = 0;
+    const sliderImg = document.getElementById('sliderImg');
+    function updateSlider() {
+        sliderImg.src = images[currentSlide];
+        sliderImg.alt = `Космический снимок ${currentSlide + 1}`;
+    }
+    document.getElementById('prevSlide').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + images.length) % images.length;
+        updateSlider();
+    });
+    document.getElementById('nextSlide').addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % images.length;
+        updateSlider();
+    });
+    updateSlider();
+
+    // 5. Дополнительный динамический элемент: приветствие по времени суток
+    const heroTitle = document.querySelector('.hero h2');
+    const hour = new Date().getHours();
+    let greeting = "";
+    if (hour < 12) greeting = "🌅 Доброе утро, исследователь космоса!";
+    else if (hour < 18) greeting = "☀️ Добрый день! Готов к полёту?";
+    else greeting = "🌙 Добрый вечер! Звёзды уже зажглись.";
+    heroTitle.textContent = greeting;
+</script>
+</body>
+</html>
